@@ -1,0 +1,17 @@
+# Core RAG pipeline
+langchain>=0.1.0
+langchain-community>=0.0.20
+faiss-cpu
+transformers>=4.38.0
+sentence-transformers
+huggingface_hub
+accelerate
+
+# LLM integration
+torch  # Required for HuggingFace models (e.g., Mistral)
+
+# UI
+streamlit
+
+# Environment & utilities
+python-dotenv
