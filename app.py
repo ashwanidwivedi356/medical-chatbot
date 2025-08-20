@@ -34,6 +34,8 @@ def load_llm_pipeline():
     )
     return HuggingFacePipeline(pipeline=gen_pipeline)
 
+#############
+
 # Load vectorstore and LLM
 vectorstore = load_vectorstore()
 llm = load_llm_pipeline()
@@ -42,7 +44,13 @@ llm = load_llm_pipeline()
 qa_chain = RetrievalQA.from_chain_type(
     llm=llm,
     chain_type="stuff",
-    retriever=vectorstore.as_retriever(),
+    retriever=vectorstore.as_retriever(
+        search_type="similarity",
+        search_kwargs={
+        "k": 3,                # fetch only top 3 results
+        "score_threshold": 0.7  # ignore irrelevant matches
+        }
+    ),
     return_source_documents=True
 )
 
